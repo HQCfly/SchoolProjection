@@ -86,7 +86,7 @@ class CusotmerConfig(ModelStark):
 
         temp.append(url(r"cancel_course/(\d+)/(\d+)", self.cancel_course))
         temp.append(url(r"public/", self.public))
-        temp.append(url(r"further/", self.further))
+        temp.append(url(r"further/(\d+)", self.further))
         temp.append(url(r"mycustomer/", self.mycustomer))
 
         return temp

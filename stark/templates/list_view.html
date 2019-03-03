@@ -1,25 +1,6 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <title>数据列表</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
-    <script src="/static/jquery-3.3.1.js"></script>
-    <style>
-        .filter a{
-            text-decoration: none;
-            color: grey;
-        }
-
-        .active{
-            color: rebeccapurple!important;
-        }
-    </style>
-</head>
-<body>
-
-<h4>数据列表</h4>
+{% extends 'base.html' %}
+{% block con %}
+    <h4>数据列表</h4>
 
 
 <div class="container">
@@ -108,5 +89,4 @@
    })
 
 </script>
-</body>
-</html>
+{% endblock %}

@@ -28,13 +28,13 @@ def initial_session(user,request):
     request.session['permission_dict']=permission_dict
     # 注册菜单权限
     permissions = user.roles.all().values("permissions__url", "permissions__action",
-                                          "permissions__group__title").distinct()
-    print("permissions:", permissions)
+                                          "permissions__title").distinct()
+    # print("permissions:", permissions)
 
     menu_permission_list = []
     for item in permissions:
         if item["permissions__action"] == "list":
-            menu_permission_list.append((item["permissions__url"], item["permissions__group__title"]))
+            menu_permission_list.append((item["permissions__url"], item["permissions__title"]))
 
-    print(menu_permission_list)
+    # print(menu_permission_list)
     request.session["menu_permission_list"] = menu_permission_list

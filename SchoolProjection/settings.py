@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'rbacdemo.service.rbacdemo.ValidPermission',
-    # "rbacdemo.service.rbacdem.ValidPermission"
+    "rbacdemo.service.rbacdem.ValidPermission"
 ]
 
 ROOT_URLCONF = 'SchoolProjection.urls'
