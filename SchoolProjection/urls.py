@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from stark.service.stark import starkSite
+from rbacdemo import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('stark/', starkSite.urls),
+    path('login/', views.login),
 ]

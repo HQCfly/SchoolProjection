@@ -20,7 +20,7 @@ class ShowList(object):
         current_page = int(self.request.GET.get("page", 1))
         base_path = self.request.path
 
-        self.pagination = Pagination(current_page, data_count, base_path, self.request.GET, per_page_num=3,
+        self.pagination = Pagination(current_page, data_count, base_path, self.request.GET, per_page_num=10,
                                      pager_count=11, )
         self.page_data = self.data_list[self.pagination.start:self.pagination.end]
 
@@ -134,7 +134,10 @@ class ShowList(object):
                                 t.append(str(mobj))
                             val = ",".join(t)
                         else:
-                            val = getattr(obj, filed)
+                            if field_obj.choices:
+                                val = getattr(obj,"get_"+filed+"_display")
+                            else:
+                                val = getattr(obj, filed)
                             if filed in self.config.list_display_links:
                                 # "app01/userinfo/(\d+)/change"
                                 _url = self.config.get_change_url(obj)
@@ -248,10 +251,6 @@ class ModelStark(object):
                     res = {"pk": obj.pk, "text": str(obj), "pop_res_id": pop_res_id}
                     import json
                     return render(request, "pop.html", {"res": res})
-
-
-
-
                 else:
                     return redirect(self.get_list_url())
 
@@ -374,6 +373,9 @@ class ModelStark(object):
         add_url = self.get_add_url()
         return render(request, "list_view.html", locals())
 
+    def extra_url(self):
+        return []
+
     def get_urls_2(self):
 
         temp = []
@@ -386,6 +388,7 @@ class ModelStark(object):
         temp.append(url(r"^(\d+)/change/", self.change_view, name="%s_%s_change" % (app_label, model_name)))
         temp.append(url(r"^$", self.list_view, name="%s_%s_list" % (app_label, model_name)))
 
+        temp.extend(self.extra_url())
         return temp
 
     @property
@@ -403,6 +406,7 @@ class StarkSite(object):
             stark_class = ModelStark
 
         self._registry[model] = stark_class(model, self)
+
 
     def get_urls(self):
         temp = []

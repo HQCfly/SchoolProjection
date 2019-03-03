@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app01.apps.App01Config',
-    'stark.apps.StarkConfig'
+    'stark.apps.StarkConfig',
+    'rbacdemo.apps.RbacdemoConfig',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'rbacdemo.service.rbacdemo.ValidPermission',
+    # "rbacdemo.service.rbacdem.ValidPermission"
 ]
 
 ROOT_URLCONF = 'SchoolProjection.urls'
